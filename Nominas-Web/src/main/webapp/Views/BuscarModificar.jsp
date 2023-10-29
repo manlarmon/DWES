@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -138,23 +137,25 @@ a:hover {
 <body>
 	<h2>Buscar Empleado/s a modificar</h2>
 	<div class="boton-container">
+		<!-- Enlace para volver al Menú Principal -->
 		<a href="empresa?opcion=volverPrincipal">
 			<button class="volver-button">Volver al Menú Principal</button>
 		</a>
 	</div>
 
 	<form action="empresa" method="post">
-		<input type="hidden" name="opcion" value="buscarModificar"> <label
-			for="dato">Selecciona un dato para buscar:</label> <select
-			name="dato" id="dato">
+		<input type="hidden" name="opcion" value="buscarModificar">
+		<label for="dato">Selecciona un dato para buscar:</label>
+		<select name="dato" id="dato">
 			<option value="dni">DNI</option>
 			<option value="nombre">Nombre</option>
 			<option value="sexo">Sexo</option>
 			<option value="categoria">Categoría</option>
 			<option value="anyos">Años trabajados</option>
-		</select> <label for="valor">Introduce el valor a buscar:</label> <input
-			type="text" id="valor" name="valor" required> <input
-			type="submit" value="BuscarModificar">
+		</select>
+		<label for="valor">Introduce el valor a buscar:</label>
+		<input type="text" id="valor" name="valor" required>
+		<input type="submit" value="BuscarModificar">
 	</form>
 
 	<c:if test="${not empty listaModificar}">

@@ -12,6 +12,13 @@ import Laboral.Clases.Empleado;
 import Laboral.Clases.Nomina;
 import Laboral.Excepciones.DatosNoCorrectosException;
 
+/**
+ * Esta clase proporciona métodos para interactuar con una base de datos
+ * relacionada con empleados y nóminas.
+ * Permite realizar operaciones como la creación, actualización, búsqueda y
+ * eliminación de registros de empleados y nóminas.
+ */
+
 public class EmpleadosDAO {
 
 	// Para las consultas
@@ -20,8 +27,20 @@ public class EmpleadosDAO {
 	PreparedStatement pstNomina = null;
 	ResultSet rs = null;
 
+	/**
+	 * Crea un nuevo registro de empleado en la base de datos y calcula su sueldo en
+	 * la tabla de nóminas.
+	 *
+	 * @param nombre    El nombre del empleado.
+	 * @param dni       El número de identificación (DNI) del empleado.
+	 * @param sexo      El género del empleado.
+	 * @param categoria La categoría del empleado.
+	 * @param anyos     Los años trabajados por el empleado.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
+
 	public void createEmpleado(String nombre, String dni, char sexo, int categoria, double anyos) throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -65,8 +84,16 @@ public class EmpleadosDAO {
 		}
 	}
 
+	/**
+	 * Crea un nuevo registro de nómina para un empleado en la base de datos.
+	 *
+	 * @param dni    El número de identificación (DNI) del empleado.
+	 * @param sueldo El sueldo del empleado.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
+
 	public void createNomina(String dni, double sueldo) throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 
@@ -96,8 +123,15 @@ public class EmpleadosDAO {
 		}
 	}
 
+	/**
+	 * Obtiene una lista de todos los empleados almacenados en la base de datos.
+	 *
+	 * @return Una lista de objetos Empleado.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
+
 	public List<Empleado> findAllEmpleados() throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		conn = getConnection();
 		conn.setAutoCommit(false);
@@ -134,29 +168,37 @@ public class EmpleadosDAO {
 		return empleadosDB;
 
 	}
+
+	/**
+	 * Busca un empleado por su número de identificación (DNI) en la base de datos.
+	 *
+	 * @param dniIntroducido El DNI del empleado a buscar.
+	 * @return El objeto Empleado encontrado o null si no se encuentra.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
 	public Empleado findEmpleadoByDni(String dniIntroducido) throws SQLException {
 
-	    Connection conn = null;
+		Connection conn = null;
 
 		Empleado empleadoEncontrado = null;
 		try {
-	        conn = getConnection();
-	        conn.setAutoCommit(false);
-	        String sql = "SELECT * FROM empleados WHERE dni = ?";
-	        pstEmpleado = conn.prepareStatement(sql);
-	        pstEmpleado.setString(1, dniIntroducido);
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			String sql = "SELECT * FROM empleados WHERE dni = ?";
+			pstEmpleado = conn.prepareStatement(sql);
+			pstEmpleado.setString(1, dniIntroducido);
 
-	        rs = pstEmpleado.executeQuery();
-	        
-	        if (rs.next()) {  
-	            String dni = rs.getString("dni");
-	            String nombre = rs.getString("nombre");
-	            char sexo = rs.getString("sexo").charAt(0);
-	            int categoria = rs.getInt("categoria");
-	            double anyos = rs.getDouble("anyos");
+			rs = pstEmpleado.executeQuery();
 
-	            empleadoEncontrado = new Empleado(nombre, dni, sexo, categoria, anyos);
-	        }
+			if (rs.next()) {
+				String dni = rs.getString("dni");
+				String nombre = rs.getString("nombre");
+				char sexo = rs.getString("sexo").charAt(0);
+				int categoria = rs.getInt("categoria");
+				double anyos = rs.getDouble("anyos");
+
+				empleadoEncontrado = new Empleado(nombre, dni, sexo, categoria, anyos);
+			}
 			conn.commit();
 			pstEmpleado.close();
 			conn.close();
@@ -168,9 +210,16 @@ public class EmpleadosDAO {
 		return empleadoEncontrado;
 	}
 
+	/**
+	 * Busca empleados cuyo DNI contenga una cadena proporcionada.
+	 *
+	 * @param dniIntroducido La cadena a buscar en los DNIs de los empleados.
+	 * @return Una lista de objetos Empleado que coinciden con la búsqueda.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
 	public List<Empleado> findEmpleadosLikeDNI(String dniIntroducido) throws SQLException {
 		List<Empleado> empleadosLikeDNI = new ArrayList<>();
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -202,9 +251,16 @@ public class EmpleadosDAO {
 		return empleadosLikeDNI;
 	}
 
+	/**
+	 * Busca empleados cuyo nombre contenga una cadena proporcionada.
+	 *
+	 * @param nombreIntroducido La cadena a buscar en los nombres de los empleados.
+	 * @return Una lista de objetos Empleado que coinciden con la búsqueda.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
 	public List<Empleado> findEmpleadosLikeNombre(String nombreIntroducido) throws SQLException {
 		List<Empleado> empleadosLikeNombre = new ArrayList<>();
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -236,9 +292,17 @@ public class EmpleadosDAO {
 		return empleadosLikeNombre;
 	}
 
+	/**
+	 * Busca empleados por género.
+	 *
+	 * @param valor El género a buscar (por ejemplo, 'H' para hombres o 'M' para
+	 *              mujeres).
+	 * @return Una lista de objetos Empleado que coinciden con la búsqueda.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
 	public List<Empleado> findEmpleadosBySexo(String valor) throws SQLException {
 		List<Empleado> empleadosBySexo = new ArrayList<>();
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -270,9 +334,16 @@ public class EmpleadosDAO {
 		return empleadosBySexo;
 	}
 
+	/**
+	 * Busca empleados por años trabajados.
+	 *
+	 * @param anyoIntroducido Los años trabajados a buscar.
+	 * @return Una lista de objetos Empleado que coinciden con la búsqueda.
+	 * @throws SQLException Si ocurre un error al acceder a la base de datos.
+	 */
 	public List<Empleado> findEmpleadosByAnyos(double anyoIntroducido) throws SQLException {
 		List<Empleado> empleadosByAnyos = new ArrayList<>();
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -305,9 +376,16 @@ public class EmpleadosDAO {
 		return empleadosByAnyos;
 	}
 
+	/**
+	 * Recupera una lista de empleados por una categoría específica.
+	 *
+	 * @param categoriaIntroducida La categoría utilizada para filtrar empleados.
+	 * @return Una lista de empleados que coinciden con la categoría especificada.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public List<Empleado> findEmpleadosByCategoria(int categoriaIntroducida) throws SQLException {
 		List<Empleado> empleadosByCategoria = new ArrayList<>();
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -340,9 +418,17 @@ public class EmpleadosDAO {
 		return empleadosByCategoria;
 	}
 
+	/**
+	 * Encuentra un registro de nómina mediante el DNI proporcionado.
+	 *
+	 * @param dniIntroducido El DNI utilizado para buscar un registro de nómina.
+	 * @return Una cadena que representa la información de la nómina para el
+	 *         empleado.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public String findNominaByDni(String dniIntroducido) throws SQLException {
 		String nominaEncontrada = null;
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -372,9 +458,18 @@ public class EmpleadosDAO {
 		return nominaEncontrada;
 	}
 
+	/**
+	 * Encuentra registros de nómina similares al DNI proporcionado.
+	 *
+	 * @param dniIntroducido El DNI parcial o completo utilizado para buscar
+	 *                       registros de nómina.
+	 * @return Una lista de cadenas que representan la información de nómina para
+	 *         empleados que coinciden.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public List<String> findNominasLikeDni(String dniIntroducido) throws SQLException {
 		List<String> nominasLikeDni = new ArrayList<>();
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -402,9 +497,20 @@ public class EmpleadosDAO {
 		return nominasLikeDni;
 	}
 
+	/**
+	 * Actualiza la información de un empleado en función de los parámetros
+	 * proporcionados.
+	 *
+	 * @param dniBuscado El DNI del empleado que se actualizará.
+	 * @param nombre     El nuevo nombre para el empleado.
+	 * @param sexo       El nuevo género para el empleado.
+	 * @param categoria  La nueva categoría para el empleado.
+	 * @param anyos      Los nuevos años de servicio para el empleado.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public void updateEmpleado(String dniBuscado, String nombre, char sexo, int categoria, double anyos)
 			throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -423,9 +529,9 @@ public class EmpleadosDAO {
 
 			if (filasAfectadas > 0) {
 				System.out.println("Registro actualizado con éxito en la tabla empleados.");
-			conn.commit();
-			pstEmpleado.close();
-			conn.close();
+				conn.commit();
+				pstEmpleado.close();
+				conn.close();
 				// Aqui se llama al metodo updateNomina para actualizar su sueldo.
 				updateNomina(dniBuscado, categoria, anyos);
 
@@ -439,8 +545,14 @@ public class EmpleadosDAO {
 		}
 	}
 
+	/**
+	 * Actualiza el nombre de un empleado.
+	 *
+	 * @param dniBuscado El DNI del empleado cuyo nombre se actualizará.
+	 * @param nombre     El nuevo nombre para el empleado.
+	 */
 	public void updateEmpleadoNombre(String dniBuscado, String nombre) {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			String sql = "UPDATE empleados SET nombre = ?  WHERE dni = ?";
@@ -462,8 +574,14 @@ public class EmpleadosDAO {
 		}
 	};
 
+	/**
+	 * Actualiza el género de un empleado.
+	 *
+	 * @param dniBuscado El DNI del empleado cuyo género se actualizará.
+	 * @param sexo       El nuevo género para el empleado.
+	 */
 	public void updateEmpleadoSexo(String dniBuscado, char sexo) {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			String sql = "UPDATE empleados SET sexo = ? WHERE dni = ?";
@@ -484,8 +602,16 @@ public class EmpleadosDAO {
 		}
 	};
 
+	/**
+	 * Actualiza la categoría de un empleado y desencadena una actualización de la
+	 * nómina correspondiente.
+	 *
+	 * @param dniBuscado El DNI del empleado que se actualizará.
+	 * @param categoria  La nueva categoría para el empleado.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public void updateEmpleadoCategoria(String dniBuscado, int categoria) throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -523,8 +649,16 @@ public class EmpleadosDAO {
 		}
 	};
 
+	/**
+	 * Actualiza los años de servicio de un empleado y desencadena una actualización
+	 * de la nómina correspondiente.
+	 *
+	 * @param dniBuscado El DNI del empleado que se actualizará.
+	 * @param anyos      Los nuevos años de servicio para el empleado.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public void updateEmpleadoAnyos(String dniBuscado, double anyos) throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -565,8 +699,16 @@ public class EmpleadosDAO {
 		}
 	};
 
+	/**
+	 * Actualiza los años de servicio y la categoría de todos los empleados,
+	 * desencadenando actualizaciones de las nóminas correspondientes.
+	 *
+	 * @param anyos     Los nuevos años de servicio para todos los empleados.
+	 * @param categoria La nueva categoría para todos los empleados.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public void updateAllEmpleados(double anyos, int categoria) throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -592,8 +734,17 @@ public class EmpleadosDAO {
 		}
 	}
 
+	/**
+	 * Actualiza los registros de nómina de todos los empleados en función de su
+	 * categoría y años de servicio, desencadenando actualizaciones de las nóminas
+	 * correspondientes.
+	 *
+	 * @param categoria La categoría utilizada para calcular las nóminas.
+	 * @param anyos     Los años de servicio utilizados para calcular las nóminas.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	private void updateAllNominas(int categoria, double anyos) throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -625,8 +776,20 @@ public class EmpleadosDAO {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Actualiza el registro de nómina de un empleado en función de su DNI,
+	 * categoría y años de servicio, desencadenando actualizaciones de la nómina
+	 * correspondiente.
+	 *
+	 * @param dni       El DNI del empleado.
+	 * @param categoria La categoría utilizada para calcular la nómina.
+	 * @param anyos     Los años de servicio utilizados para calcular la nómina.
+	 * @throws DatosNoCorrectosException Si los datos del empleado no son correctos.
+	 * @throws SQLException              Si se produce un error en la base de datos.
+	 */
 	private void updateNomina(String dni, int categoria, double anyos) throws DatosNoCorrectosException, SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
@@ -660,43 +823,48 @@ public class EmpleadosDAO {
 		}
 	}
 
+	/**
+	 * Elimina un empleado y sus registros de nómina correspondientes en función de
+	 * su DNI.
+	 *
+	 * @param dni El DNI del empleado que se eliminará.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	public void deleteEmpleadoNominaByDni(String dni) throws SQLException {
-	    Connection conn = null;
+		Connection conn = null;
 
 		try {
 			conn = getConnection();
 			conn.setAutoCommit(false);
 
-			//Primero tengo que eliminar el empleado de la tabla nominas ya que dni es FK
+			// Primero tengo que eliminar el empleado de la tabla nominas ya que dni es FK
 			String sql = "DELETE FROM nominas WHERE dni = ?";
 			pstNomina = conn.prepareStatement(sql);
-	        pstNomina.setString(1, dni);
+			pstNomina.setString(1, dni);
 			int filasAfectadas = pstNomina.executeUpdate();
-			
 
 			if (filasAfectadas > 0) {
 				System.out.println("Empleado eliminado con éxito en la tabla nominas.");
-			
+
 				conn.commit();
 				pstNomina.close();
-				
+
 				sql = "DELETE FROM empleados WHERE dni = ?";
 				pstEmpleado = conn.prepareStatement(sql);
-		        pstEmpleado.setString(1, dni);
+				pstEmpleado.setString(1, dni);
 				filasAfectadas = pstEmpleado.executeUpdate();
-				
-				if(filasAfectadas > 0) {
+
+				if (filasAfectadas > 0) {
 					System.out.println("Empleado eliminado con éxito en la tabla empleados.");
 					conn.commit();
 					pstEmpleado.close();
-				}else {
+				} else {
 					System.out.println("No se ha podido eliminar el empleado de la tabla empleados.");
 				}
-				
+
 			} else {
 				System.out.println("No se ha podido eliminar el empleado de la tabla nominas.");
 			}
-
 
 			conn.close();
 
@@ -705,7 +873,13 @@ public class EmpleadosDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Obtiene una conexión de base de datos.
+	 *
+	 * @return Una conexión de base de datos.
+	 * @throws SQLException Si se produce un error en la base de datos.
+	 */
 	private Connection getConnection() throws SQLException {
 		return ConexDB.getConn();
 	}

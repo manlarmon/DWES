@@ -69,6 +69,4 @@ public class Persona {
         System.out.println("Nombre: " + this.nombre + ", DNI: " + this.dni);
     }
 
-
-    
 }

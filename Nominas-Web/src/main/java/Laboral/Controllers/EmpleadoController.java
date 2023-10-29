@@ -17,7 +17,7 @@ import Laboral.DBUtils.EmpleadosDAO;
 import Laboral.Clases.*;
 
 /**
- * Servlet implementation class EmpleadoController
+ * Servlet que administra las peticiones para las tablas empleados y nominas.
  */
 @WebServlet(description = "administra peticiones para las tablas empleados y nominas ", urlPatterns = { "/empresa" })
 public class EmpleadoController extends HttpServlet {
@@ -32,6 +32,11 @@ public class EmpleadoController extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Inicializa el servlet.
+	 * 
+	 * @throws ServletException Si ocurre un error durante la inicialización.
+	 */
 	public void init() throws ServletException {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -41,8 +46,12 @@ public class EmpleadoController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Gestiona las solicitudes GET.
+	 *
+	 * @param request  La solicitud HTTP.
+	 * @param response La respuesta HTTP.
+	 * @throws ServletException Si ocurre un error durante la solicitud.
+	 * @throws IOException      Si ocurre un error de E/S durante la solicitud.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -116,8 +125,12 @@ public class EmpleadoController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Gestiona las solicitudes POST.
+	 *
+	 * @param request  La solicitud HTTP recibida.
+	 * @param response La respuesta HTTP que se enviará.
+	 * @throws ServletException Si ocurre un error durante la solicitud.
+	 * @throws IOException      Si ocurre un error de E/S durante la solicitud.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -130,14 +143,14 @@ public class EmpleadoController extends HttpServlet {
 			if (dni != null && !dni.trim().isEmpty()) {
 				try {
 					listaSalarios = empleadoDAO.findNominasLikeDni(dni);
-				if (listaSalarios.isEmpty()) {
+					if (listaSalarios.isEmpty()) {
 						System.out.println("No hay empleados según tu criterio de búsqueda");
-				}else {
-					System.out.println("Empleados encontrados:");
-					for (String empleado : listaSalarios) {
-						System.out.println(empleado);
+					} else {
+						System.out.println("Empleados encontrados:");
+						for (String empleado : listaSalarios) {
+							System.out.println(empleado);
+						}
 					}
-				}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -158,30 +171,30 @@ public class EmpleadoController extends HttpServlet {
 				// Realiza la búsqueda según el campo especificado
 				try {
 					switch (dato) {
-					case "dni":
-						listaModificar = empleadoDAO.findEmpleadosLikeDNI(valor);
-						break;
-					case "nombre":
-						listaModificar = empleadoDAO.findEmpleadosLikeNombre(valor);
-						break;
-					case "sexo":
-						listaModificar = empleadoDAO.findEmpleadosBySexo(valor);
-						break;
-					case "categoria":
-						int categoria = Integer.parseInt(valor);
-						listaModificar = empleadoDAO.findEmpleadosByCategoria(categoria);
-						break;
-					case "anyos":
-						double anyos = Double.parseDouble(valor);
-						listaModificar = empleadoDAO.findEmpleadosByAnyos(anyos);
-						break;
-					default:
-						break;
+						case "dni":
+							listaModificar = empleadoDAO.findEmpleadosLikeDNI(valor);
+							break;
+						case "nombre":
+							listaModificar = empleadoDAO.findEmpleadosLikeNombre(valor);
+							break;
+						case "sexo":
+							listaModificar = empleadoDAO.findEmpleadosBySexo(valor);
+							break;
+						case "categoria":
+							int categoria = Integer.parseInt(valor);
+							listaModificar = empleadoDAO.findEmpleadosByCategoria(categoria);
+							break;
+						case "anyos":
+							double anyos = Double.parseDouble(valor);
+							listaModificar = empleadoDAO.findEmpleadosByAnyos(anyos);
+							break;
+						default:
+							break;
 					}
-					
+
 					if (listaModificar.isEmpty()) {
 						System.out.println("No hay empleados según tu criterio de búsqueda");
-					}else {
+					} else {
 						System.out.println("Empleados encontrados:");
 						for (Empleado empleado : listaModificar) {
 							System.out.println(empleado);
