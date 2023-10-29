@@ -1,0 +1,9 @@
+Sarah Johnson,45001234H,F,7,6.5
+Michael Smith,28000678J,M,8,8.2
+Emily Davis,56000987K,F,6,6.8
+David Brown,39000456L,M,10,7.5
+Olivia Martin,61000543M,F,5,6.0
+Ethan Wilson,75000321N,M,7,7.8
+Ava Anderson,48000123P,F,8,8.5
+Liam Garcia,59000789Q,M,6,6.2
+Sophia Rodriguez,32000876R,F,9,7.9

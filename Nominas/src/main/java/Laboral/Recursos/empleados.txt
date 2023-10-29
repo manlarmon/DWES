@@ -1,0 +1,4 @@
+James Cosling,32000032G,M,9,7.0
+Ada Lovelace,32000031J,F,,1
+Manuel,54436597J,M,,
+Manuela,54436598F,F,6,8.0

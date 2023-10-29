@@ -1,0 +1,11 @@
+Michael Smith,28000678J,M,3,3.0
+James Cosling,32000032G,M,3,3.0
+Sophia Rodriguez,32000876R,F,3,3.0
+David Brown,39000456L,M,3,3.0
+Sarah Johnson,45001234H,F,3,3.0
+Ava Anderson,48000123P,F,3,3.0
+Ana Rosa,54436597J,F,3,3.0
+Emily Davis,56000987K,F,3,3.0
+Liam Garcia,59000789Q,M,3,3.0
+Olivia Martin,61000543M,F,3,3.0
+Ethan Wilson,75000321N,M,3,3.0
