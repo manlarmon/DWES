@@ -24,7 +24,7 @@ public class Empleado extends Persona {
 	 * @param anyos     Los años trabajados del empleado.
 	 * @throws DatosNoCorrectosException Si los datos del empleado no son correctos.
 	 */
-	public Empleado(String nombre, String dni, char sexo, int categoria, double anyos)
+	public Empleado( String dni, String nombre, char sexo, int categoria, double anyos)
 			throws DatosNoCorrectosException {
 		super(nombre, dni, sexo);
 

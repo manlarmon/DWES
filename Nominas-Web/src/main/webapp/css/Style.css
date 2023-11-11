@@ -1,0 +1,423 @@
+@charset "UTF-8";
+/*Index.jsp*/
+.content {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 50px;
+    margin-bottom: 100px;
+
+
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+/*Inicio*/
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #B0A695;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    flex-direction: column; 
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+table {
+	width: 70%;
+	margin: 20px auto;
+	background-color: #333;
+	box-shadow: 0 0 300px rgba(0, 0, 0, 0.5);
+	border: 2px solid #ffcc00;
+	padding: 10px;
+	border-radius: 20px ;
+}
+
+
+
+td {
+	padding: 12px;
+	text-align: center;
+}
+
+
+a {
+	text-decoration: none;
+	color: #F2EE9D;
+	transition: color 0.3s;
+}
+
+a:hover {
+	color: #ffcc00;
+}
+
+
+
+
+/* Header */
+header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000; 
+}
+
+.header-title h1 {
+	color: #F2EE9D;
+	font-size: 24px;
+	padding-right: 30px;
+}
+
+.navbar ul {
+	list-style: none;
+	display: flex;
+	margin-right: 20px;
+}
+
+.navbar li {
+	margin-right: 20px;
+}
+
+.navbar a {
+	text-decoration: none;
+	color: #F2EE9D;
+	font-size: larger;
+	font-weight: bold;
+	transition: color 0.3s;
+}
+
+.navbar a:hover {
+	color: #ffcc00;
+}
+
+/*Footer*/
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.firma {
+	color: #F2EE9D;
+	padding-left: 20px;
+	display: inline-block;
+}
+
+.logos {
+
+	display: inline-block;
+}
+
+.logos i {
+	padding-right: 20px;
+}
+
+.logos a {
+	color: #F2EE9D;
+
+	
+}
+
+.logos i:hover {
+	text-decoration: none;
+	padding-right: 20px;
+	color: #ffcc00;
+}
+
+.logo {
+	display: inline-block;
+	margin: 15px;
+	max-height: 30px;
+}
+/*Listar Empleados*/
+
+
+.tablaListar {
+	width: 100%;
+	margin: 20px auto;
+	border-collapse: collapse;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border: 0px solid transparent;
+	border-radius: 0px;
+}
+
+.tablaListar td, th{
+		border: 1px solid #ccc;
+	padding: 12px;
+	text-align: left;
+}
+
+.tablaListar th{
+	background-color: rgb(128, 0, 0);
+	color: #fff;
+}
+
+.tablaListar tr:nth-child(even){
+	background-color: #f2f2f2;
+
+}
+.tablaListar tr:hover{
+	background-color: #ddd;
+
+}
+.DNI {
+	font-weight: bold;
+	color: rgb(128, 64, 0);
+}
+
+.DNI:hover {
+	text-decoration: underline;
+}
+
+.boton-container {
+	text-align: center;
+	margin-top: 20px;
+}
+
+/*BuscarSalario*/
+.buscador {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form{
+	text-align: center;
+	margin: 20px;
+}
+
+label {
+	display: block;
+	margin: 10px 0;
+}
+
+input[type="text"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+	padding: 10px 20px;
+	background-color:#007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+        background-color: #0056b3;
+}
+
+.buscador a {
+	display: block;
+	text-align: center;
+	margin-top: 10px;
+	text-decoration: none;
+	color: #007bff;
+}
+
+.buscador a:hover {
+	text-decoration: underline;
+}
+
+.buscador ul {
+	list-style-type: none;
+	padding: 10px;
+	margin: 10px;
+}
+
+.buscador li {
+	padding: 10px;
+	border: 1px solid #ddd;
+	margin: 5px 0;
+	background-color: #f2f2f2;
+}
+
+.buscador li:hover {
+	background-color: #ddd;
+}
+
+.form-group {
+	margin: 10px;
+}
+
+/*BuscarModificar*/
+h2 {
+	text-align: center;
+	color: #333;
+}
+
+.tablaListar a {
+	text-decoration: none;
+		color: #007bff;
+
+	transition: font-weight 0.5s,
+}
+
+.tablaListar a:hover {
+color:  rgb(128, 0, 0);	
+text-decoration: none;
+}
+
+.buscadorModificar form {
+	max-width: 400px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.buscadorModificar label {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.buscadorModificar select {
+	width: 96%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.buscadorModificar input[type="text"] {
+	width: 90%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.buscadorModificar select {
+	height: 40px;
+}
+
+.buscadorModificar input[type="submit"] {
+	background-color:#007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+.buscadorModificar input[type="submit"]:hover {
+        background-color: #0056b3;
+}
+
+/*Editar*/
+.formularioEmpleado{
+	align-items: center;
+}
+   .formularioEmpleado form {
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 3px 3px 5px #888;
+      }
+
+     .formularioEmpleado  table {
+		 background-color: #596E79;
+		 border: 0px solid;
+        width: 100%;
+      }
+
+     .formularioEmpleado  table tr {
+        margin: 10px 0;
+      }
+
+    .formularioEmpleado   table td {
+		color: #F2EE9D;
+        padding: 10px;
+      }
+
+    .formularioEmpleado   input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+
+    .formularioEmpleado   input[type="submit"] {
+        background-color: #0074cc;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+   .formularioEmpleado    .boton-container {
+        text-align: center;
+        margin: 20px;
+      }
+
+    .formularioEmpleado   .volver-button {
+        text-align: center;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+   .formularioEmpleado    .volver-button:hover {
+        background-color: #0056b3;
+      }
+
+/*CrearEmpleados.jsp*/
+.volver-button {
+	text-align: center;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.volver-button:hover {
+	background-color: #0056b3;
+}
+
+
+
