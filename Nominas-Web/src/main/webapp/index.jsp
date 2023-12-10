@@ -13,8 +13,8 @@
 <body>
 
 	<div class = "container">
+	
 		<%@include file="Views/Components/Header.jsp"%>
-
 		<div class="content">
 			<c:if test="${empty requestScope.contenido}">
 				<c:import url="Views/Inicio.jsp" />
@@ -23,7 +23,6 @@
 			<c:if test="${not empty requestScope.contenido}">
 				<c:import url="${requestScope.contenido}" />
 			</c:if>
-
 		</div>
 
 		<%@include file="Views/Components/Footer.jsp"%>

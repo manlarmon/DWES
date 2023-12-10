@@ -283,9 +283,7 @@ h2 {
 .tablaListar a {
 	text-decoration: none;
 		color: #007bff;
-
-	transition: font-weight 0.5s,
-}
+		}
 
 .tablaListar a:hover {
 color:  rgb(128, 0, 0);	

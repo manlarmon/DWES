@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Lista de Empleados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <style>
+    td,
+    th {
+      text-align: center;
+      justify-content: center;
+    }
+
+    .navbar-brand {
+      padding-left: 20px;
+    }
+
+    .DNI {
+      font-weight: bold;
+    }
+
+    .DNI:hover {
+      color: rgb(12, 147, 196);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Nominas Spring</a>
+    <!-- Navbar links-->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/empleados}">
+            Empleados
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/empleados/crear}">
+            Crear Empleado
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/empleados/busca_nomina}">
+            Bucar Nomina
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <br>
+  <div class="container">
+    <div class="row">
+      <h1>Buscar empleados</h1>
+    </div>
+
+    <form th:action="@{/empleados/busca_empleados/buscar}" method="get" class="mb-3">
+      <div class="input-group">
+        <select class="form-select" name="campo">
+          <option value="dni">DNI</option>
+          <option value="nombre">Nombre</option>
+          <option value="sexo">Sexo</option>
+          <option value="categoria">Categoria</option>
+          <option value="anyos">Años</option>
+          <!-- Agrega más opciones según tus campos -->
+        </select>
+        <input type="text" class="form-control" name="valor" placeholder="Ingrese el valor de búsqueda">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>DNI</th>
+          <th>Nombre</th>
+          <th>Sexo</th>
+          <th>Categoria</th>
+          <th>Años</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- "empleados" se le pasa desde el controlador en el modelo.addAttribute -->
+        <tr th:each="empleado : ${empleados}">
+          <td class="DNI" th:text="${empleado.dni}">DNI</td>
+          <td th:text="${empleado.nombre}">Nombre</td>
+          <td th:text="${empleado.sexo}">Sexo</td>
+          <td th:text="${empleado.categoria}">Categoria</td>
+          <td th:text="${empleado.anyos}">Años</td>
+          <td>
+            <a th:href="@{/empleados/editar/{dni}(dni=${empleado.dni})}" class="btn btn-warning">Editar</a>
+            <a th:href="@{/empleados/eliminar/{dni}(dni=${empleado.dni})}" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
