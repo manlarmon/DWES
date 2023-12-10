@@ -16,9 +16,10 @@ public class Persona {
      * @param dni    El número de DNI de la persona.
      * @param sexo   El sexo de la persona ('M' para masculino, 'F' para femenino).
      */
-    public Persona(String nombre, String dni, char sexo) {
-        this.nombre = nombre;
+    public Persona(String dni, String nombre, char sexo) {
+        
         this.dni = dni;
+        this.nombre = nombre;
         this.sexo = sexo;
     }
 

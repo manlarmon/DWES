@@ -45,12 +45,20 @@
    <version>1.2</version>
   </dependency>
   
+  <dependency>
+    <groupId>taglibs</groupId>
+    <artifactId>standard</artifactId>
+    <version>1.1.2</version>
+  </dependency>
+  
   <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
 <dependency>
     <groupId>org.mariadb.jdbc</groupId>
     <artifactId>mariadb-java-client</artifactId>
     <version>3.2.0</version>
 </dependency>
+
 
  </dependencies>
 </project>
