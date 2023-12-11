@@ -57,30 +57,34 @@
   <div class="container">
 
     <div class="row">
-      <h1>Lista de empleados</h1>
+      <h1>Buscador de nomina</h1>
     </div>
 
-    <br>
+    <form th:action="@{/empleados/busca_nomina/buscar}" method="get" class="mb-3">
+      <div class="input-group">
+        <select class="form-select" name="campo" disabled>
+          <option value="dni">DNI</option>
+        </select>
+        <input type="text" class="form-control" name="dni" placeholder="Ingrese el valor de búsqueda">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
+    </form>
 
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
           <th>DNI</th>
           <th>Nombre</th>
-          <th>Sexo</th>
-          <th>Categoria</th>
-          <th>Años</th>
+          <th>Nomina</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <!-- "empleados" se le pasa desde el controlador en el modelo.addAttribute -->
-        <tr th:each="empleado : ${empleados}">
+        <tr th:each="empleado : ${empleado}">
           <td class="DNI" th:text="${empleado.dni}">DNI</td>
           <td th:text="${empleado.nombre}">Nombre</td>
-          <td th:text="${empleado.sexo}">Sexo</td>
-          <td th:text="${empleado.categoria}">Categoria</td>
-          <td th:text="${empleado.anyos}">Años</td>
+          <td th:text="${empleado.nomina}">Nomina</td>
           <td>
             <a th:href="@{/empleados/editar/{dni}(dni=${empleado.dni})}" class="btn btn-warning">Editar</a>
             <a th:href="@{/empleados/eliminar/{dni}(dni=${empleado.dni})}" class="btn btn-danger">Eliminar</a>

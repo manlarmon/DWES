@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.Nomina.Entities.Empleado;
 import com.Nomina.Services.EmpleadoService;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class EmpleadoController {
@@ -23,14 +22,14 @@ public class EmpleadoController {
 	private EmpleadoService empleadoService;
 
 	@GetMapping({ "empleados", "/" })
-	//Model se utiliza para pasar atributos a la vista
+	// Model se utiliza para pasar atributos a la vista
 	public String listAllEmpleados(Model model) {
 		model.addAttribute("empleados", empleadoService.listAllEmpleados());
 		return "empleados"; // archivo html de empleados
 	}
 
-
 	@GetMapping({ "/empleados/buscar" })
+	// PathVariable para url y RequestParam para formularios
 	public String findEmpleadosLike(Model model, @RequestParam String campo, @RequestParam String valor) {
 		List<Empleado> empleados = new ArrayList<>();
 
@@ -59,6 +58,19 @@ public class EmpleadoController {
 		}
 		model.addAttribute("empleados", empleados);
 		return "empleados";
+	}
+
+	@GetMapping("/empleados/busca_nomina")
+	public String findNomina(Model model) {
+		return "find_nomina";
+	}
+
+	@GetMapping({ "/empleados/busca_nomina/buscar" })
+	public String findNominaByDni(Model model, @RequestParam String dni) {
+		Empleado empleado = new Empleado();
+		empleado = empleadoService.findEmpleadoByDni(dni);
+		model.addAttribute("empleado", empleado);
+		return "find_nomina";
 	}
 
 	@GetMapping("/empleados/crear")
